@@ -9,7 +9,7 @@
     <form id="testForm">
         
         <p>Student Name:</p>
-        <input type="text" id="name" required><br><br>
+        <input type="text" id="name" name="name" required><br><br>
 
         <p>1. Computer ka brain kya hota hai?</p>
         <input type="radio" name="q1" value="CPU"> CPU<br>
@@ -30,11 +30,16 @@ function submitTest() {
     const q1 = document.querySelector('input[name="q1"]:checked')?.value;
     const q2 = document.querySelector('input[name="q2"]:checked')?.value;
 
-    fetch("https://sheetdb.io/api/v1/attn9un56lmzc", {   // ← Yaha apna API link paste karo
+    fetch("https://sheetdb.io/api/v1/attn9un56lmzc", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            data: [{ name: name, q1: q1, q2: q2, time: new Date().toLocaleString() }]
+            data: [{ 
+                name: name, 
+                q1: q1, 
+                q2: q2, 
+                time: new Date().toLocaleString()
+            }]
         })
     })
     .then(res => res.json())
